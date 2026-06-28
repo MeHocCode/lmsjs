@@ -1,9 +1,9 @@
 export default function MyBorrowRecordHistory({ records = [], books = [] }) {
-  const getBookTitle = (id) => books.find(b => b.id === id)?.title || id;
+  const getBookTitle = (id) => books.find(b => String(b.id) === String(id))?.title || id;
 
   return (
     <div className="table-responsive">
-      <table className="table table-striped">
+      <table className="table table-striped align-middle">
         <thead className="table-info">
           <tr><th>Sách</th><th>Ngày mượn</th><th>Hạn trả</th><th>Ngày trả</th><th>Trạng thái</th></tr>
         </thead>
@@ -13,12 +13,26 @@ export default function MyBorrowRecordHistory({ records = [], books = [] }) {
           ) : records.map(r => (
             <tr key={r.id}>
               <td>{getBookTitle(r.bookId)}</td>
-              <td>{r.borrowDate}</td>
-              <td>{r.dueDate}</td>
+              <td>{r.borrowDate || '—'}</td>
+              <td>{r.dueDate || '—'}</td>
               <td>{r.returnDate || '—'}</td>
               <td>
-                <span className={`badge ${r.status === 'borrowed' ? 'bg-warning text-dark' : 'bg-success'}`}>
-                  {r.status === 'borrowed' ? 'Đang mượn' : 'Đã trả'}
+                <span className={`badge ${
+                  r.status === 'pending' 
+                    ? 'bg-info text-white' 
+                    : r.status === 'borrowed' 
+                    ? 'bg-warning text-dark' 
+                    : r.status === 'rejected'
+                    ? 'bg-danger text-white'
+                    : 'bg-success'
+                }`}>
+                  {r.status === 'pending' 
+                    ? 'Chờ duyệt' 
+                    : r.status === 'borrowed' 
+                    ? 'Đang mượn' 
+                    : r.status === 'rejected'
+                    ? 'Bị từ chối'
+                    : 'Đã trả'}
                 </span>
               </td>
             </tr>

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/common/Navbar';
+import Footer from './components/common/Footer';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import LoadingSpinner from './components/common/LoadingSpinner';
 
@@ -11,27 +12,39 @@ import BooksPage from './pages/BooksPage';
 import BookDetailPage from './pages/BookDetailPage';
 import LoginPage from './pages/LoginPage';
 import MyBorrowRecordsPage from './pages/MyBorrowRecordsPage';
+import ProfilePage from './pages/ProfilePage';
 
 const LibrarianBooksPage = lazy(() => import('./pages/librarian/LibrarianBooksPage'));
 const LibrarianCategoriesPage = lazy(() => import('./pages/librarian/LibrarianCategoriesPage'));
 const LibrarianMembersPage = lazy(() => import('./pages/librarian/LibrarianMembersPage'));
 const LibrarianBorrowRecordsPage = lazy(() => import('./pages/librarian/LibrarianBorrowRecordsPage'));
+const LibrarianDashboard = lazy(() => import('./pages/librarian/LibrarianDashboard'));
+const MemberDashboard = lazy(() => import('./pages/member/MemberDashboard'));
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="container-fluid px-0">
+        <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
           <Navbar />
-          <div className="container mt-4 pb-5">
+          <div className="flex-grow-1">
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/books/:id" element={<BookDetailPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/dashboard" element={
+                  <ProtectedRoute><MemberDashboard /></ProtectedRoute>
+                } />
                 <Route path="/my-borrow-records" element={
                   <ProtectedRoute><MyBorrowRecordsPage /></ProtectedRoute>
+                } />
+                <Route path="/profile" element={
+                  <ProtectedRoute><ProfilePage /></ProtectedRoute>
+                } />
+                <Route path="/librarian/dashboard" element={
+                  <ProtectedRoute requireLibrarian><LibrarianDashboard /></ProtectedRoute>
                 } />
                 <Route path="/librarian/books" element={
                   <ProtectedRoute requireLibrarian><LibrarianBooksPage /></ProtectedRoute>
@@ -45,10 +58,11 @@ function App() {
                 <Route path="/librarian/borrow-records" element={
                   <ProtectedRoute requireLibrarian><LibrarianBorrowRecordsPage /></ProtectedRoute>
                 } />
-                <Route path="*" element={<div className="alert alert-warning mt-5">404 — Trang không tồn tại</div>} />
+                <Route path="*" element={<div className="container mt-5"><div className="alert alert-warning">404 — Trang không tồn tại</div></div>} />
               </Routes>
             </Suspense>
           </div>
+          <Footer />
           <ToastContainer position="top-right" autoClose={3000} />
         </div>
       </BrowserRouter>

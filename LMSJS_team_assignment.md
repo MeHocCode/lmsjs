@@ -4,23 +4,24 @@
 
 ## Trạng thái hiện tại
 
-| Phase | Tên | Trạng thái | Người làm |
-|---|---|---|---|
-| Phase 0 | Project Setup | ✅ XONG | Tất cả |
-| Phase 1 | Services Layer | ✅ XONG (trên main) | Người 4 |
-| Phase 2 | Auth | 🔄 Đang làm | **Người 3** |
-| Phase 3 | Common Components | 🔄 Đang làm | **Người 4** |
-| Phase 4 | Book Module | ⏳ Chờ Phase 1 | **Người 1** |
-| Phase 5 | BorrowRecord Module | ⏳ Chờ Phase 1 | **Người 2** |
-| Phase 6 | Public Pages | ⏳ Chờ Phase 3+4+5 | **Người 1 + 2** |
-| Phase 7 | Librarian Pages | ⏳ Chờ Phase 3+4+5 | **Người 1 + 2 + 3** |
-| Phase 8 | App.js hoàn chỉnh | ⏳ Chờ tất cả merge | **Người 4** |
-| Phase 9 | Testing | ⏳ Chờ Phase 8 | **Người 5** |
-| Phase 10 | Deploy | ⏳ Cuối cùng | **Người 4 + 5** |
+| Phase    | Tên                | Trạng thái           | Người làm                |
+| -------- | ------------------- | ---------------------- | --------------------------- |
+| Phase 0  | Project Setup       | ✅ XONG                | Tất cả                    |
+| Phase 1  | Services Layer      | ✅ XONG (trên main)   | Người 4                   |
+| Phase 2  | Auth                | 🔄 Đang làm          | **Người 3**         |
+| Phase 3  | Common Components   | 🔄 Đang làm          | **Người 4**         |
+| Phase 4  | Book Module         | ⏳ Chờ Phase 1        | **Người 1**         |
+| Phase 5  | BorrowRecord Module | ⏳ Chờ Phase 1        | **Người 2**         |
+| Phase 6  | Public Pages        | ⏳ Chờ Phase 3+4+5    | **Người 1 + 2**     |
+| Phase 7  | Librarian Pages     | ⏳ Chờ Phase 3+4+5    | **Người 1 + 2 + 3** |
+| Phase 8  | App.js hoàn chỉnh | ⏳ Chờ tất cả merge | **Người 4**         |
+| Phase 9  | Testing             | ⏳ Chờ Phase 8        | **Người 5**         |
+| Phase 10 | Deploy              | ⏳ Cuối cùng         | **Người 4 + 5**     |
 
 ---
 
 ## PHASE 2 — Auth 🔄 Đang chạy
+
 **Người phụ trách: Người 3 | Branch: `feature/auth-context`**
 
 ```bash
@@ -31,6 +32,7 @@ git merge main   # sync code mới nhất từ main
 ### File cần tạo (theo thứ tự):
 
 **1. `src/context/AuthContext.jsx`** — làm TRƯỚC TIÊN
+
 ```
 Hàm cần có:
 - AuthProvider (component bọc toàn app)
@@ -43,6 +45,7 @@ Hàm cần có:
 ```
 
 **2. `src/components/common/ProtectedRoute.jsx`**
+
 ```
 Props: children, requireLibrarian (mặc định false)
 Logic:
@@ -52,6 +55,7 @@ Logic:
 ```
 
 **3. `src/pages/LoginPage.jsx`**
+
 ```
 State: email, password, msgError
 Logic:
@@ -62,6 +66,7 @@ Logic:
 ```
 
 ### Commit + PR:
+
 ```bash
 git add src/context/AuthContext.jsx src/components/common/ProtectedRoute.jsx src/pages/LoginPage.jsx
 git commit -m "feat(auth): AuthContext, ProtectedRoute, LoginPage"
@@ -72,6 +77,7 @@ git push origin feature/auth-context
 ---
 
 ## PHASE 3 — Common Components 🔄 Đang chạy
+
 **Người phụ trách: Người 4 | Branch: `feature/common-components`**
 
 ```bash
@@ -81,19 +87,20 @@ git checkout feature/common-components
 
 ### File cần tạo (theo thứ tự):
 
-| Thứ tự | File | Phụ thuộc |
-|---|---|---|
-| 1 | `LoadingSpinner.jsx` | Không |
-| 2 | `ErrorMessage.jsx` | Không |
-| 3 | `ConfirmModal.jsx` | Không |
-| 4 | `DataTable.jsx` | ConfirmModal |
-| 5 | `SearchBar.jsx` | Không |
-| 6 | `FilterPanel.jsx` | Không |
-| 7 | `Pagination.jsx` | Không |
-| 8 | `Sidebar.jsx` | Không |
-| 9 | `Navbar.jsx` | ⚠️ Cần AuthContext → làm SAU KHI Phase 2 merge vào main |
+| Thứ tự | File                   | Phụ thuộc                                                   |
+| -------- | ---------------------- | ------------------------------------------------------------- |
+| 1        | `LoadingSpinner.jsx` | Không                                                        |
+| 2        | `ErrorMessage.jsx`   | Không                                                        |
+| 3        | `ConfirmModal.jsx`   | Không                                                        |
+| 4        | `DataTable.jsx`      | ConfirmModal                                                  |
+| 5        | `SearchBar.jsx`      | Không                                                        |
+| 6        | `FilterPanel.jsx`    | Không                                                        |
+| 7        | `Pagination.jsx`     | Không                                                        |
+| 8        | `Sidebar.jsx`        | Không                                                        |
+| 9        | `Navbar.jsx`         | ⚠️ Cần AuthContext → làm SAU KHI Phase 2 merge vào main |
 
 ### Commit từng nhóm:
+
 ```bash
 # Commit 1: Không phụ thuộc gì
 git add src/components/common/LoadingSpinner.jsx src/components/common/ErrorMessage.jsx src/components/common/ConfirmModal.jsx
@@ -119,6 +126,7 @@ git push origin feature/common-components
 ---
 
 ## PHASE 4 — Book Module
+
 **Người phụ trách: Người 1 | Branch: `feature/book-module`**
 
 ```bash
@@ -133,11 +141,11 @@ git push -u origin feature/book-module
 
 ### File cần tạo:
 
-| Thứ tự | File | Phụ thuộc |
-|---|---|---|
-| 1 | `src/components/book/BookCard.jsx` | Không |
-| 2 | `src/components/book/BookList.jsx` | BookCard |
-| 3 | `src/components/book/BookForm.jsx` | Không (categoryService có sẵn) |
+| Thứ tự | File                                 | Phụ thuộc                       |
+| -------- | ------------------------------------ | --------------------------------- |
+| 1        | `src/components/book/BookCard.jsx` | Không                            |
+| 2        | `src/components/book/BookList.jsx` | BookCard                          |
+| 3        | `src/components/book/BookForm.jsx` | Không (categoryService có sẵn) |
 
 ```bash
 git add src/components/book/
@@ -150,6 +158,7 @@ git push origin feature/book-module
 ---
 
 ## PHASE 5 — BorrowRecord Module
+
 **Người phụ trách: Người 2 | Branch: `feature/borrow-module`**
 
 ```bash
@@ -161,13 +170,14 @@ git merge main
 
 ### File cần tạo:
 
-| Thứ tự | File | Phụ thuộc |
-|---|---|---|
-| 1 | `src/components/borrowRecord/BorrowRecordForm.jsx` | bookService + memberService (có sẵn) |
-| 2 | `src/components/borrowRecord/BorrowRecordTable.jsx` | Không |
-| 3 | `src/components/borrowRecord/MyBorrowRecordHistory.jsx` | Không |
+| Thứ tự | File                                                      | Phụ thuộc                            |
+| -------- | --------------------------------------------------------- | -------------------------------------- |
+| 1        | `src/components/borrowRecord/BorrowRecordForm.jsx`      | bookService + memberService (có sẵn) |
+| 2        | `src/components/borrowRecord/BorrowRecordTable.jsx`     | Không                                 |
+| 3        | `src/components/borrowRecord/MyBorrowRecordHistory.jsx` | Không                                 |
 
 > ⚠️ **LOGIC ĐẶC BIỆT trong `BorrowRecordForm.jsx`:**
+>
 > ```javascript
 > // Fetch sách: CHỈ lấy sách còn sách (availableCopies > 0)
 > bookService.getAllBooks().then(data => setBooks(data.filter(b => b.availableCopies > 0)))
@@ -182,6 +192,7 @@ git push origin feature/borrow-module
 ---
 
 ## PHASE 6 — Public Pages
+
 **Người phụ trách: Người 1 + Người 2 | Trong branch của mỗi người**
 
 > ⏳ **Điều kiện:** Phase 3 (common) đã merge vào main → merge main vào branch trước khi code
@@ -199,45 +210,51 @@ git merge main
 | `src/pages/HomePage.jsx` | Người 1 | feature/book-module |
 | `src/pages/BooksPage.jsx` | Người 1 | feature/book-module |
 | `src/pages/BookDetailPage.jsx` | Người 1 | feature/book-module |
+| `src/pages/ProfilePage.jsx` | Người 1 | feature/book-module |
+| `src/pages/member/MemberDashboard.jsx` | Người 2 | feature/borrow-module |
 | `src/pages/MyBorrowRecordsPage.jsx` | Người 2 | feature/borrow-module |
 
 > ⚠️ **LOGIC QUAN TRỌNG trong `MyBorrowRecordsPage.jsx`:**
+>
 > ```javascript
 > // ĐÚNG — 2 bước:
-> const member = await memberService.getMemberByUserId(user.uId);  // Bước 1
+> const member = await memberService.getMemberByUserId(user.id);  // Bước 1
 > const records = await borrowRecordService.getRecordsByMemberId(member.id);  // Bước 2
 >
 > // SAI — kết quả sẽ rỗng vì users.id ≠ members.id:
-> borrowRecordService.getRecordsByMemberId(user.uId)  // ❌
+> borrowRecordService.getRecordsByMemberId(user.id)  // ❌
 > ```
 
 ```bash
 # Người 1
-git add src/pages/HomePage.jsx src/pages/BooksPage.jsx src/pages/BookDetailPage.jsx
-git commit -m "feat(pages): HomePage, BooksPage, BookDetailPage"
+git add src/pages/HomePage.jsx src/pages/BooksPage.jsx src/pages/BookDetailPage.jsx src/pages/ProfilePage.jsx
+git commit -m "feat(pages): HomePage, BooksPage, BookDetailPage, ProfilePage"
 git push origin feature/book-module
 
 # Người 2
-git add src/pages/MyBorrowRecordsPage.jsx
-git commit -m "feat(pages): MyBorrowRecordsPage với logic userId→memberId"
+git add src/pages/MyBorrowRecordsPage.jsx src/pages/member/MemberDashboard.jsx
+git commit -m "feat(pages): MemberDashboard, MyBorrowRecordsPage"
 git push origin feature/borrow-module
 ```
 
 ---
 
 ## PHASE 7 — Librarian Pages
+
 **Người phụ trách: Người 1 + 2 + 3 | Trong branch của mỗi người**
 
 > ⏳ **Điều kiện:** Phase 3 (common có Sidebar) đã merge vào main
 
 | File | Người làm | Branch |
 |---|---|---|
+| `src/pages/librarian/LibrarianDashboard.jsx` | Người 1 | feature/book-module |
 | `src/pages/librarian/LibrarianBooksPage.jsx` | Người 1 | feature/book-module |
 | `src/pages/librarian/LibrarianBorrowRecordsPage.jsx` | Người 2 | feature/borrow-module |
 | `src/pages/librarian/LibrarianMembersPage.jsx` | Người 3 | feature/member-category |
 | `src/pages/librarian/LibrarianCategoriesPage.jsx` | Người 3 | feature/member-category |
 
 **Người 3 — Branch `feature/member-category`:**
+
 ```bash
 git checkout feature/member-category
 git merge main  # lấy services + common components
@@ -257,6 +274,7 @@ git push origin feature/member-category
 ---
 
 ## PHASE 8 — App.js hoàn chỉnh
+
 **Người phụ trách: Người 4 | Branch: `main` (trực tiếp hoặc branch riêng)**
 
 > ⏳ **Điều kiện:** TẤT CẢ branch đã merge vào main
@@ -282,7 +300,11 @@ import BooksPage from './pages/BooksPage';
 import BookDetailPage from './pages/BookDetailPage';
 import LoginPage from './pages/LoginPage';
 import MyBorrowRecordsPage from './pages/MyBorrowRecordsPage';
+import ProfilePage from './pages/ProfilePage';
+import Footer from './components/common/Footer';
 
+const LibrarianDashboard = lazy(() => import('./pages/librarian/LibrarianDashboard'));
+const MemberDashboard = lazy(() => import('./pages/member/MemberDashboard'));
 const LibrarianBooksPage = lazy(() => import('./pages/librarian/LibrarianBooksPage'));
 const LibrarianCategoriesPage = lazy(() => import('./pages/librarian/LibrarianCategoriesPage'));
 const LibrarianMembersPage = lazy(() => import('./pages/librarian/LibrarianMembersPage'));
@@ -292,17 +314,26 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="container-fluid px-0">
+        <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
           <Navbar />
-          <div className="container mt-4 pb-5">
+          <div className="flex-grow-1">
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/books/:id" element={<BookDetailPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/dashboard" element={
+                  <ProtectedRoute><MemberDashboard /></ProtectedRoute>
+                } />
                 <Route path="/my-borrow-records" element={
                   <ProtectedRoute><MyBorrowRecordsPage /></ProtectedRoute>
+                } />
+                <Route path="/profile" element={
+                  <ProtectedRoute><ProfilePage /></ProtectedRoute>
+                } />
+                <Route path="/librarian/dashboard" element={
+                  <ProtectedRoute requireLibrarian><LibrarianDashboard /></ProtectedRoute>
                 } />
                 <Route path="/librarian/books" element={
                   <ProtectedRoute requireLibrarian><LibrarianBooksPage /></ProtectedRoute>
@@ -316,10 +347,11 @@ function App() {
                 <Route path="/librarian/borrow-records" element={
                   <ProtectedRoute requireLibrarian><LibrarianBorrowRecordsPage /></ProtectedRoute>
                 } />
-                <Route path="*" element={<div className="alert alert-warning mt-5">404 — Trang không tồn tại</div>} />
+                <Route path="*" element={<div className="container mt-5"><div className="alert alert-warning">404 — Trang không tồn tại</div></div>} />
               </Routes>
             </Suspense>
           </div>
+          <Footer />
           <ToastContainer position="top-right" autoClose={3000} />
         </div>
       </BrowserRouter>
@@ -338,22 +370,26 @@ git push origin main
 ---
 
 ## PHASE 9 — Testing
+
 **Người phụ trách: Người 5 | Chạy song song từ Phase 4 trở đi**
 
 ### Checklist test theo user:
 
 **Guest:**
+
 - [ ] `/` → thấy trang chủ + sách nổi bật
 - [ ] `/books` → search/filter/pagination hoạt động
 - [ ] `/books/1` → thấy chi tiết sách
 - [ ] `/librarian/books` → bị redirect về `/login`
 
 **Member (đăng nhập `member@lmsjs.com / member123`):**
+
 - [ ] Redirect về `/books` sau login
 - [ ] `/my-borrow-records` → thấy đúng lịch sử của mình (không phải người khác)
 - [ ] Không thấy menu "Quản lý"
 
 **Librarian (đăng nhập `librarian@lmsjs.com / admin123`):**
+
 - [ ] Redirect về `/librarian/books` sau login
 - [ ] Thêm sách → Toast success → xuất hiện trong danh sách
 - [ ] Sửa sách → form điền sẵn dữ liệu cũ
@@ -362,6 +398,7 @@ git push origin main
 - [ ] Bấm "Trả sách" → `availableCopies` tăng 1, status = `returned`
 
 **Kỹ thuật:**
+
 - [ ] Network tab → chunk file load riêng khi vào `/librarian/*` (Lazy Loading OK)
 - [ ] Console không có lỗi đỏ
 - [ ] Bootstrap Dropdown Navbar hoạt động (nếu dùng `data-bs-toggle`)
@@ -369,6 +406,7 @@ git push origin main
 ---
 
 ## PHASE 10 — Deploy
+
 **Người phụ trách: Người 4 + Người 5**
 
 ```bash
@@ -384,11 +422,13 @@ npx vercel --prod
 ```
 
 **Sau khi deploy:** sửa `src/services/api.js`:
+
 ```javascript
 baseURL: process.env.REACT_APP_API_URL || 'http://localhost:9999'
 ```
 
 Tạo file `.env` cho production:
+
 ```
 REACT_APP_API_URL=https://your-server.onrender.com
 ```

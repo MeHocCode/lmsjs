@@ -38,28 +38,14 @@ export default function Navbar() {
             <li className="nav-item">
               <Link className="nav-link px-3 text-white-50" to="/books">Danh mục sách</Link>
             </li>
-            {isMember() && (
+            {isLibrarian() && (
               <li className="nav-item">
-                <Link className="nav-link px-3 text-white-50" to="/my-borrow-records">Lịch sử mượn</Link>
+                <Link className="nav-link px-3 text-white-50" to="/librarian/dashboard">Bảng điều khiển</Link>
               </li>
             )}
-            {isLibrarian() && (
-              <li className="nav-item dropdown">
-                <button
-                  className="nav-link dropdown-toggle px-3 text-white-50 btn btn-link"
-                  id="navbarDropdown" 
-                  data-bs-toggle="dropdown" 
-                  aria-expanded="false"
-                >
-                  Quản lý thư viện
-                </button>
-                <ul className="dropdown-menu border-0 shadow mt-2" aria-labelledby="navbarDropdown" style={{ borderRadius: '8px' }}>
-                  <li><Link className="dropdown-item py-2 px-3" to="/librarian/books">📚 Quản lý sách</Link></li>
-                  <li><Link className="dropdown-item py-2 px-3" to="/librarian/categories">🏷️ Quản lý thể loại</Link></li>
-                  <li><Link className="dropdown-item py-2 px-3" to="/librarian/members">👤 Quản lý độc giả</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item py-2 px-3" to="/librarian/borrow-records">📋 Mượn / Trả sách</Link></li>
-                </ul>
+            {isMember() && (
+              <li className="nav-item">
+                <Link className="nav-link px-3 text-white-50" to="/dashboard">Bảng điều khiển</Link>
               </li>
             )}
           </ul>

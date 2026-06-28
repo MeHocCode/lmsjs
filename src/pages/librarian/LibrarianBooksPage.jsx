@@ -41,6 +41,14 @@ export default function LibrarianBooksPage() {
     { key: 'id', label: 'ID' },
     { key: 'title', label: 'Tên sách' },
     { key: 'author', label: 'Tác giả' },
+    { 
+      key: 'categoryId', 
+      label: 'Thể loại',
+      render: (book) => {
+        const cat = categories.find(c => String(c.id) === String(book.categoryId));
+        return cat ? cat.name : 'Chưa phân loại';
+      }
+    },
     { key: 'availableCopies', label: 'Còn lại' },
     { key: 'totalCopies', label: 'Tổng số' },
   ];

@@ -70,16 +70,22 @@ Thư viện quy mô nhỏ hiện quản lý sách và việc mượn-trả bằn
 /login                     Đăng nhập (email + password)
 /books                     Danh sách sách (search + filter + pagination)
 /books/:id                 Chi tiết sách
+
+--- Chỉ Member truy cập ---
+/dashboard                 Bảng điều khiển cho độc giả
 /my-borrow-records         Lịch sử mượn của Member (cần đăng nhập)
+/profile                   Hồ sơ cá nhân của Member
 
 --- Chỉ Librarian truy cập ---
+/librarian/dashboard           Bảng điều khiển cho thủ thư
 /librarian/books               CRUD Book
 /librarian/categories          CRUD Category
 /librarian/members             CRUD Member
-/librarian/borrow-records      Quản lý mượn/trả (tạo BorrowRecord, đóng BorrowRecord)
+/librarian/borrow-records      Quản lý mượn/trả (duyệt/từ chối mượn, trả sách)
+/profile                       Hồ sơ cá nhân của Librarian
 ```
 
-*Không có dashboard riêng — login thành công với role=librarian redirect thẳng `/librarian/books`; role=member redirect thẳng `/books`.*
+*Có dashboard riêng cho từng role — login thành công với role=librarian redirect thẳng `/librarian/dashboard`; role=member redirect thẳng `/dashboard`.*
 
 ### 3.2 Screen Flow
 
@@ -87,20 +93,22 @@ Thư viện quy mô nhỏ hiện quản lý sách và việc mượn-trả bằn
 ```
 /home
  ├─ /books                              (search, filter, pagination)
- │   └─ /books/:id                      (chi tiết sách)
+ │   └─ /books/:id                      (chi tiết sách, đăng ký mượn sách)
  └─ /login
-     ├─ đăng nhập thành công, role=member     → /books
-     └─ đăng nhập thành công, role=librarian  → /librarian/books
+     ├─ đăng nhập thành công, role=member     → /dashboard
+     └─ đăng nhập thành công, role=librarian  → /librarian/dashboard
 
-(Member, sau khi đăng nhập, có thêm menu "Lịch sử mượn" → /my-borrow-records)
+(Member, sau khi đăng nhập, có menu Sidebar truy cập: /dashboard, /books, /my-borrow-records, /profile)
 ```
 
 **Nhóm Librarian (role=librarian), sau /login:**
 ```
+/librarian/dashboard          → Bảng điều khiển, thống kê chung
 /librarian/books              → Book Form (modal/inline, tạo/sửa) — 2-column layout (list + form)
 /librarian/categories         → Category Form (modal/inline, tạo/sửa)
 /librarian/members            → Member Form (modal/inline, tạo/sửa) — copy pattern Books page
-/librarian/borrow-records     → Create Borrow Record (form) + nút "Trả sách" ngay trên dòng (không cần screen riêng)
+/librarian/borrow-records     → Duyệt/Từ chối yêu cầu mượn, Trả sách, Tạo phiếu mượn (form)
+/profile                      → Hồ sơ cá nhân
 ```
 
 *Không tách Detail/Edit thành screen riêng cho Member — dùng pattern "list + form 2 cột" giống Books page cho mọi entity, không tách route riêng cho Detail/Edit. Cấu trúc này giữ nguyên theo guide giảng viên (chỉ đổi tên gọi route/file, không đổi cách tổ chức screen).*
@@ -112,7 +120,8 @@ src/
   components/
     common/
       Navbar.jsx                    // hiển thị menu theo role (isLibrarian/isMember/isAuthenticated)
-      Sidebar.jsx                   // [Mới] menu dọc cho Librarian (Books / Categories / Members / BorrowRecords)
+      Sidebar.jsx                   // menu dọc cho Librarian và Member
+      Footer.jsx                    // chân trang
       SearchBar.jsx
       FilterPanel.jsx
       Pagination.jsx
@@ -120,8 +129,8 @@ src/
       LoadingSpinner.jsx
       ErrorMessage.jsx
       ProtectedRoute.jsx            // wrapper, có prop requireLibrarian
-      ConfirmModal.jsx              // [Mới] Modal xác nhận Delete, thay thế window.confirm()
-      Toast.jsx                     // [Mới] wrapper react-toastify, thay thế alert()
+      ConfirmModal.jsx              // Modal xác nhận Delete, thay thế window.confirm()
+      Toast.jsx                     // wrapper react-toastify, thay thế alert()
     book/
       BookCard.jsx
       BookList.jsx
@@ -141,8 +150,12 @@ src/
     LoginPage.jsx                   // axios GET /users?email=&password=, lưu localStorage
     BooksPage.jsx
     BookDetailPage.jsx
+    ProfilePage.jsx
     MyBorrowRecordsPage.jsx
+    member/
+      MemberDashboard.jsx
     librarian/                      // lazy-loaded qua React.lazy (NFR6)
+      LibrarianDashboard.jsx
       LibrarianBooksPage.jsx
       LibrarianCategoriesPage.jsx
       LibrarianMembersPage.jsx

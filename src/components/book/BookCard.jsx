@@ -1,8 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, categories = [] }) {
   const navigate = useNavigate();
   const isAvailable = book.availableCopies > 0;
+  const category = categories.find(c => String(c.id) === String(book.categoryId));
+
+  const getCoverImage = () => {
+    if (!book.coverImage) return 'https://via.placeholder.com/150x200?text=No+Image';
+    if (book.coverImage.startsWith('http') || book.coverImage.startsWith('/')) {
+      return book.coverImage;
+    }
+    return `/${book.coverImage}`;
+  };
 
   return (
     <div className="card h-100 shadow-sm book-card" style={{ cursor: 'pointer' }}
@@ -11,17 +20,26 @@ export default function BookCard({ book }) {
         <span className="badge bg-danger position-absolute top-0 end-0 m-2">Hết sách</span>
       )}
       <img
-        src={book.coverImage || 'https://via.placeholder.com/150x200?text=No+Image'}
+        src={getCoverImage()}
         className="card-img-top"
         alt={book.title}
-        style={{ height: '200px', objectFit: 'cover' }}
+        style={{ height: '200px', objectFit: 'contain', backgroundColor: '#f8f9fa' }}
       />
-      <div className="card-body">
-        <h6 className="card-title fw-bold">{book.title}</h6>
-        <p className="card-text text-muted small">{book.author}</p>
-        <span className={`badge ${isAvailable ? 'bg-success' : 'bg-secondary'}`}>
-          Còn: {book.availableCopies}/{book.totalCopies}
-        </span>
+      <div className="card-body d-flex flex-column justify-content-between">
+        <div>
+          <h6 className="card-title fw-bold mb-1">{book.title}</h6>
+          <p className="card-text text-muted small mb-2">{book.author}</p>
+        </div>
+        <div className="d-flex justify-content-between align-items-center mt-2">
+          {category && (
+            <span className="badge bg-light text-secondary border small">
+              {category.name}
+            </span>
+          )}
+          <span className={`badge ${isAvailable ? 'bg-success' : 'bg-secondary'}`}>
+            {book.availableCopies}/{book.totalCopies}
+          </span>
+        </div>
       </div>
     </div>
   );

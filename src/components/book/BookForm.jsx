@@ -23,9 +23,36 @@ export default function BookForm({ book, categories = [], onSave, onCancel }) {
       return;
     }
     setError('');
+
+    // Xử lý tự động tách đường dẫn ảnh bìa khi người dùng dán đường dẫn tuyệt đối
+    let processedCoverImage = form.coverImage.trim();
+
+    // Loại bỏ dấu ngoặc kép ở đầu và cuối (ví dụ khi Copy as path từ Windows)
+    if (processedCoverImage.startsWith('"') && processedCoverImage.endsWith('"')) {
+      processedCoverImage = processedCoverImage.slice(1, -1);
+    }
+    if (processedCoverImage.startsWith("'") && processedCoverImage.endsWith("'")) {
+      processedCoverImage = processedCoverImage.slice(1, -1);
+    }
+
+    // Chuyển đổi dấu gạch chéo ngược thành xuôi
+    processedCoverImage = processedCoverImage.replace(/\\/g, '/');
+
+    // Tìm kiếm cụm từ /public/ hoặc public/ để lấy phần tương đối sau nó
+    const publicIndex = processedCoverImage.indexOf('/public/');
+    if (publicIndex !== -1) {
+      processedCoverImage = processedCoverImage.substring(publicIndex + 8);
+    } else {
+      const altIndex = processedCoverImage.indexOf('public/');
+      if (altIndex !== -1) {
+        processedCoverImage = processedCoverImage.substring(altIndex + 7);
+      }
+    }
+
     onSave({
       ...form,
-      categoryId: parseInt(form.categoryId),
+      coverImage: processedCoverImage,
+      categoryId: form.categoryId,
       totalCopies: parseInt(form.totalCopies),
       availableCopies: parseInt(form.availableCopies),
     });
@@ -60,8 +87,14 @@ export default function BookForm({ book, categories = [], onSave, onCancel }) {
         </div>
       </div>
       <div className="mb-3">
-        <label className="form-label">URL ảnh bìa</label>
-        <input name="coverImage" className="form-control" value={form.coverImage} onChange={handleChange} />
+        <label className="form-label">Đường dẫn / URL ảnh bìa</label>
+        <input 
+          name="coverImage" 
+          className="form-control" 
+          value={form.coverImage} 
+          onChange={handleChange} 
+          placeholder="Ví dụ: D:\...\public\images\harrypotter.jpg hoặc images/harrypotter.jpg"
+        />
       </div>
       <div className="d-flex gap-2">
         <button className="btn btn-primary" onClick={handleSubmit}>

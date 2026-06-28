@@ -7,6 +7,7 @@ import BookList from '../components/book/BookList';
 import Pagination from '../components/common/Pagination';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
+import Sidebar from '../components/common/Sidebar';
 
 const BOOKS_PER_PAGE = 8;
 
@@ -31,7 +32,7 @@ export default function BooksPage() {
   const filtered = books.filter(book => {
     const matchSearch = book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                         book.author.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchCat = !selectedCategory || book.categoryId === parseInt(selectedCategory);
+    const matchCat = !selectedCategory || String(book.categoryId) === String(selectedCategory);
     const matchAvail = availabilityFilter === 'all' ||
       (availabilityFilter === 'available' && book.availableCopies > 0) ||
       (availabilityFilter === 'unavailable' && book.availableCopies === 0);
@@ -45,19 +46,22 @@ export default function BooksPage() {
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <div>
-      <h2 className="mb-4">Danh sách sách</h2>
-      <div className="row mb-3">
-        <div className="col-md-6"><SearchBar onSearch={(t) => { setSearchTerm(t); setCurrentPage(1); }} /></div>
-        <div className="col-md-6">
-          <FilterPanel categories={categories} onFilterChange={(cat, avail) => {
-            setSelectedCategory(cat); setAvailabilityFilter(avail); setCurrentPage(1);
-          }} />
+    <div className="d-flex">
+      <Sidebar />
+      <div className="flex-grow-1 p-4">
+        <h2 className="mb-4">Danh sách sách</h2>
+        <div className="row mb-3">
+          <div className="col-md-6"><SearchBar onSearch={(t) => { setSearchTerm(t); setCurrentPage(1); }} /></div>
+          <div className="col-md-6">
+            <FilterPanel categories={categories} onFilterChange={(cat, avail) => {
+              setSelectedCategory(cat); setAvailabilityFilter(avail); setCurrentPage(1);
+            }} />
+          </div>
         </div>
+        <p className="text-muted">Tìm thấy {filtered.length} sách</p>
+        <BookList books={paginated} categories={categories} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       </div>
-      <p className="text-muted">Tìm thấy {filtered.length} sách</p>
-      <BookList books={paginated} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
     </div>
   );
 }

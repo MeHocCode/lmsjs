@@ -6,6 +6,7 @@ import bookService from '../services/bookService';
 import MyBorrowRecordHistory from '../components/borrowRecord/MyBorrowRecordHistory';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
+import Sidebar from '../components/common/Sidebar';
 
 export default function MyBorrowRecordsPage() {
   const { user } = useAuth();
@@ -45,9 +46,12 @@ export default function MyBorrowRecordsPage() {
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <div>
-      <h2 className="mb-4">Lịch sử mượn sách của tôi</h2>
-      <MyBorrowRecordHistory records={records} books={books} />
+    <div className="d-flex">
+      <Sidebar />
+      <div className="flex-grow-1 p-4">
+        <h2 className="mb-4">Lịch sử mượn sách của tôi</h2>
+        <MyBorrowRecordHistory records={records} books={books} />
+      </div>
     </div>
   );
 }

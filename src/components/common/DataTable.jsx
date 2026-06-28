@@ -17,7 +17,7 @@ export default function DataTable({ data = [], columns = [], onEdit, onDelete })
 
   return (
     <>
-      <div className="table-responsive shadow-sm" style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e5e5e5' }}>
+      <div className="table-responsive shadow-sm" style={{ borderRadius: '12px', overflowX: 'auto', border: '1px solid #e5e5e5' }}>
         <table className="table table-hover mb-0 align-middle">
           <thead style={{ backgroundColor: '#f4f3f2' }}>
             <tr>
@@ -25,14 +25,14 @@ export default function DataTable({ data = [], columns = [], onEdit, onDelete })
                 <th 
                   key={col.key} 
                   className="py-3 px-4 text-secondary fw-semibold"
-                  style={{ borderBottomWidth: '1px', borderColor: '#e5e5e5' }}
+                  style={{ borderBottomWidth: '1px', borderColor: '#e5e5e5', whiteSpace: 'nowrap' }}
                 >
                   {col.label}
                 </th>
               ))}
               <th 
                 className="py-3 px-4 text-secondary fw-semibold text-end"
-                style={{ borderBottomWidth: '1px', borderColor: '#e5e5e5' }}
+                style={{ borderBottomWidth: '1px', borderColor: '#e5e5e5', whiteSpace: 'nowrap' }}
               >
                 Thao tác
               </th>
@@ -49,25 +49,27 @@ export default function DataTable({ data = [], columns = [], onEdit, onDelete })
               data.map((item) => (
                 <tr key={item.id}>
                   {columns.map((col) => (
-                    <td key={col.key} className="py-3 px-4 text-dark">
+                    <td key={col.key} className="py-3 px-4 text-dark" style={{ whiteSpace: 'nowrap' }}>
                       {col.render ? col.render(item) : item[col.key]}
                     </td>
                   ))}
                   <td className="py-3 px-4 text-end">
-                    <button 
-                      className="btn btn-warning btn-sm me-2 fw-semibold px-3" 
-                      onClick={() => onEdit(item)}
-                      style={{ borderRadius: '8px', color: '#262626' }}
-                    >
-                      Sửa
-                    </button>
-                    <button 
-                      className="btn btn-outline-danger btn-sm fw-semibold px-3" 
-                      onClick={() => handleDeleteClick(item.id)}
-                      style={{ borderRadius: '8px' }}
-                    >
-                      Xóa
-                    </button>
+                    <div className="d-flex justify-content-end gap-2" style={{ whiteSpace: 'nowrap' }}>
+                      <button 
+                        className="btn btn-primary btn-sm fw-semibold px-3" 
+                        onClick={() => onEdit(item)}
+                        style={{ borderRadius: '8px' }}
+                      >
+                        Sửa
+                      </button>
+                      <button 
+                        className="btn btn-outline-danger btn-sm fw-semibold px-3" 
+                        onClick={() => handleDeleteClick(item.id)}
+                        style={{ borderRadius: '8px' }}
+                      >
+                        Xóa
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

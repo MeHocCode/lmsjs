@@ -49,6 +49,7 @@ lmsjs/
 │   │   ├── common/
 │   │   │   ├── Navbar.jsx
 │   │   │   ├── Sidebar.jsx
+│   │   │   ├── Footer.jsx
 │   │   │   ├── SearchBar.jsx
 │   │   │   ├── FilterPanel.jsx
 │   │   │   ├── Pagination.jsx
@@ -75,8 +76,12 @@ lmsjs/
 │   │   ├── LoginPage.jsx
 │   │   ├── BooksPage.jsx
 │   │   ├── BookDetailPage.jsx
+│   │   ├── ProfilePage.jsx
 │   │   ├── MyBorrowRecordsPage.jsx
+│   │   ├── member/
+│   │   │   └── MemberDashboard.jsx
 │   │   └── librarian/
+│   │       ├── LibrarianDashboard.jsx
 │   │       ├── LibrarianBooksPage.jsx
 │   │       ├── LibrarianCategoriesPage.jsx
 │   │       ├── LibrarianMembersPage.jsx
@@ -107,23 +112,22 @@ lmsjs/
 ```json
 {
   "users": [
-    { "id": 1, "email": "librarian@lmsjs.com", "password": "admin123", "fullname": "Thủ thư chính", "role": "librarian" },
-    { "id": 2, "email": "member@lmsjs.com", "password": "member123", "fullname": "Độc giả 1", "role": "member" }
+    { "id": "1", "email": "librarian@lmsjs.com", "password": "abc", "fullname": "Thủ thư chính", "role": "librarian" },
+    { "id": "DspmOC9F1k4", "fullname": "Cao Thanh Tuấn", "email": "member1@lmsjs.com", "password": "123", "role": "member" }
   ],
   "categories": [
-    { "id": 1, "name": "Công nghệ" },
-    { "id": 2, "name": "Văn học" }
+    { "id": "P6tsMqHYrQA", "name": "Phiêu Lưu" },
+    { "id": "9jyD9KeRRy8", "name": "Kỳ ảo" }
   ],
   "books": [
-    { "id": 1, "title": "Clean Code", "author": "Robert C. Martin", "categoryId": 1, "totalCopies": 5, "availableCopies": 3, "coverImage": "" },
-    { "id": 2, "title": "Đắc Nhân Tâm", "author": "Dale Carnegie", "categoryId": 2, "totalCopies": 4, "availableCopies": 0, "coverImage": "" }
+    { "id": "bAbvlqAvQKk", "title": "Life of Pi", "author": "Yann Martel", "categoryId": "P6tsMqHYrQA", "totalCopies": 4, "availableCopies": 3, "coverImage": "images/lifeofpi.jpg" }
   ],
   "members": [
-    { "id": 1, "name": "Nguyễn Văn A", "email": "member@lmsjs.com", "phone": "0912345678", "userId": 2 }
+    { "id": "utVRM5U35gA", "userId": "DspmOC9F1k4", "phone": "0123456789", "gender": "Nam", "dob": "2000-10-10", "city": "Hà Nội", "address": "Yên Lãng", "favorites": ["Phiêu Lưu"] }
   ],
   "borrowRecords": [
-    { "id": 1, "bookId": 1, "memberId": 1, "borrowDate": "2026-06-15", "dueDate": "2026-06-29", "returnDate": null, "status": "borrowed" },
-    { "id": 2, "bookId": 2, "memberId": 1, "borrowDate": "2026-06-01", "dueDate": "2026-06-15", "returnDate": "2026-06-14", "status": "returned" }
+    { "id": "aRukWN3MWWs", "bookId": "bAbvlqAvQKk", "memberId": "utVRM5U35gA", "dueDate": "2026-07-12", "borrowDate": "2026-06-28", "returnDate": null, "status": "borrowed" },
+    { "id": "0SBvA9PBat0", "bookId": "Z8TnpmAdqH8", "memberId": "utVRM5U35gA", "dueDate": null, "borrowDate": null, "returnDate": null, "status": "rejected" }
   ]
 }
 ```

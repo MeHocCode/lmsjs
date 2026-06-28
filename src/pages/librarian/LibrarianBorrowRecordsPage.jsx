@@ -31,6 +31,22 @@ export default function LibrarianBorrowRecordsPage() {
     catch (e) { toast.error(e.message || 'Có lỗi xảy ra!'); }
   };
 
+  const handleApprove = async (id) => {
+    try { await borrowRecordService.approveBorrowRecord(id); toast.success('Duyệt mượn sách thành công!'); fetchAll(); }
+    catch (e) { toast.error(e.message || 'Có lỗi xảy ra!'); }
+  };
+
+  const handleReject = async (id) => {
+    if (!window.confirm('Bạn có chắc chắn muốn từ chối yêu cầu mượn này?')) return;
+    try { 
+      await borrowRecordService.rejectBorrowRecord(id); 
+      toast.success('Đã từ chối yêu cầu mượn sách!'); 
+      fetchAll(); 
+    } catch (e) { 
+      toast.error(e.message || 'Có lỗi xảy ra!'); 
+    }
+  };
+
   const handleReturn = async (id) => {
     try { await borrowRecordService.returnBook(id); toast.success('Trả sách thành công!'); fetchAll(); }
     catch (e) { toast.error(e.message || 'Có lỗi xảy ra!'); }
@@ -49,7 +65,14 @@ export default function LibrarianBorrowRecordsPage() {
         </div>
         <div className="card shadow-sm p-3">
           <h5>Danh sách phiếu mượn</h5>
-          <BorrowRecordTable records={records} books={books} members={members} onReturn={handleReturn} />
+          <BorrowRecordTable 
+            records={records} 
+            books={books} 
+            members={members} 
+            onApprove={handleApprove} 
+            onReturn={handleReturn} 
+            onReject={handleReject}
+          />
         </div>
       </div>
     </div>

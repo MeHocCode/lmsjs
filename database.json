@@ -1,77 +1,166 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "librarian@lmsjs.com",
-      "password": "admin123",
-      "fullname": "Thủ thư chính",
+      "password": "abc",
+      "fullname": "sieuvippromaxultra",
       "role": "librarian"
     },
     {
-      "id": 2,
-      "email": "member@lmsjs.com",
-      "password": "member123",
-      "fullname": "Độc giả 1",
-      "role": "member"
+      "fullname": "Cao Thanh Tuấn",
+      "email": "member1@lmsjs.com",
+      "password": "123",
+      "role": "member",
+      "id": "DspmOC9F1k4"
     }
   ],
   "categories": [
     {
-      "id": 1,
-      "name": "Công nghệ"
+      "name": "Phiêu Lưu",
+      "id": "P6tsMqHYrQA"
     },
     {
-      "id": 2,
-      "name": "Văn học"
+      "name": "Kỳ ảo",
+      "id": "9jyD9KeRRy8"
+    },
+    {
+      "name": "Tâm lý học",
+      "id": "JL3rvnyetYY"
+    },
+    {
+      "name": "Phân tích dữ liệu",
+      "id": "4zziuUP2Gb4"
+    },
+    {
+      "name": "Triết học",
+      "id": "1cJQmfTZEOw"
+    },
+    {
+      "name": "Văn học",
+      "id": "ELtDm1M0BIY"
+    },
+    {
+      "name": "Tiếng Anh",
+      "id": "PtrUSsXmb_o"
     }
   ],
   "books": [
     {
-      "id": 1,
-      "title": "Clean Code",
-      "author": "Robert C. Martin",
-      "categoryId": 1,
-      "totalCopies": 5,
+      "title": "Life of Pi",
+      "author": "Yann Martel",
+      "categoryId": "P6tsMqHYrQA",
+      "totalCopies": 4,
       "availableCopies": 3,
-      "coverImage": ""
+      "coverImage": "images/lifeofpi.jpg",
+      "id": "bAbvlqAvQKk"
     },
     {
-      "id": 2,
-      "title": "Đắc Nhân Tâm",
-      "author": "Dale Carnegie",
-      "categoryId": 2,
-      "totalCopies": 4,
-      "availableCopies": 0,
-      "coverImage": ""
+      "title": "Harry Potter",
+      "author": "J.K rowling",
+      "categoryId": "9jyD9KeRRy8",
+      "totalCopies": 2,
+      "availableCopies": 2,
+      "coverImage": "images/harrypotter.jpg",
+      "id": "7238E7u3ZaY"
+    },
+    {
+      "title": "Nicomachean ethics",
+      "author": "Aristotle",
+      "categoryId": "1cJQmfTZEOw",
+      "totalCopies": 10,
+      "availableCopies": 10,
+      "coverImage": "images/aristotle.jpg",
+      "id": "jSC_l2tvmng"
+    },
+    {
+      "title": "Grammar English",
+      "author": "John newman",
+      "categoryId": "PtrUSsXmb_o",
+      "totalCopies": 1,
+      "availableCopies": 1,
+      "coverImage": "images/grammarEnglish.jpg",
+      "id": "fKTe9G3lipU"
+    },
+    {
+      "title": "Don quixote",
+      "author": "Don quixote",
+      "categoryId": "ELtDm1M0BIY",
+      "totalCopies": 3,
+      "availableCopies": 3,
+      "coverImage": "images/donquixote.jpg",
+      "id": "5mIaj8cV6tQ"
+    },
+    {
+      "title": "The Vanishing",
+      "author": "Jakobsen",
+      "categoryId": "ELtDm1M0BIY",
+      "totalCopies": 5,
+      "availableCopies": 5,
+      "coverImage": "images/thevanishing.jpg",
+      "id": "BNdGtKFmzsM"
+    },
+    {
+      "title": "Data Analysis",
+      "author": "Pandas",
+      "categoryId": "4zziuUP2Gb4",
+      "totalCopies": 1,
+      "availableCopies": 1,
+      "coverImage": "images/dataanalysis.jpg",
+      "id": "Z8TnpmAdqH8"
     }
   ],
   "members": [
     {
-      "id": 1,
-      "name": "Nguyễn Văn A",
-      "email": "member@lmsjs.com",
-      "phone": "0912345678",
-      "userId": 2
+      "userId": "DspmOC9F1k4",
+      "phone": "0123456789",
+      "gender": "Nam",
+      "dob": "2000-10-10",
+      "city": "Hà Nội",
+      "address": "Yên Lãng",
+      "favorites": [
+        "Phiêu Lưu"
+      ],
+      "id": "utVRM5U35gA"
     }
   ],
   "borrowRecords": [
     {
-      "id": 1,
-      "bookId": 1,
-      "memberId": 1,
-      "borrowDate": "2026-06-15",
-      "dueDate": "2026-06-29",
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "utVRM5U35gA",
+      "dueDate": "2026-07-12",
+      "borrowDate": "2026-06-28",
       "returnDate": null,
-      "status": "borrowed"
+      "status": "borrowed",
+      "id": "aRukWN3MWWs"
     },
     {
-      "id": 2,
-      "bookId": 2,
-      "memberId": 1,
-      "borrowDate": "2026-06-01",
-      "dueDate": "2026-06-15",
-      "returnDate": "2026-06-14",
-      "status": "returned"
+      "bookId": "Z8TnpmAdqH8",
+      "memberId": "utVRM5U35gA",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "rejected",
+      "id": "0SBvA9PBat0"
+    },
+    {
+      "bookId": "fKTe9G3lipU",
+      "memberId": "utVRM5U35gA",
+      "dueDate": "2026-07-12",
+      "borrowDate": "2026-06-28",
+      "returnDate": "2026-06-28",
+      "status": "returned",
+      "id": "fuQ_TyG6knA"
+    },
+    {
+      "bookId": "5mIaj8cV6tQ",
+      "memberId": "utVRM5U35gA",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "pending",
+      "id": "l82k3BNM7UQ"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
